@@ -1,0 +1,30 @@
+CS3443: Simulating 4-bit MIPS ALU 
+
+You are to write a gate level simulator for a simple 4-bit ALU
+with the following operations:
+AND, OR, ADD (1-bit full adder), SUB, SLT, Overflows/Zero Detection.
+All the operations and architectures to simulate are based on
+what we have studied in class. So, well review them before simulation.
+Note that the underlying number system is two's complement.
+
+You may use any language of your favor to write the simulator.
+
+1) Input format (to be input from the command line):
+
+Opcode (in string) operand1 operand2 (both operands in integer):
+e.g., ADD 1111 0001, SUB 1111 0001, AND 1111 0001, OR 1111 0001, SLT 1111 0001
+
+2) Output format (to be displayed on the screen):
+
+-For ADD, SUB, AND, OR:
+Opcode: 4-bit result, 1-bit overflow-detection, 1-bit zero-detection
+
+ADD: 0000, 1, 1
+SUB: 1110, 0, 0
+AND: 0001, 0, 0
+OR:  1111, 0, 0
+
+-For SLT:
+1-bit result (0 or 1)
+
+SLT: 0001

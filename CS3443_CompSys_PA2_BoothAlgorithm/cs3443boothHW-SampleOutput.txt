@@ -1,0 +1,10 @@
+multiplicand: 0111 => 7 
+multiplier: 0100 => 4
+
+Iteration 0: multiplicand  .0111 (decimal value); multiplier  .0100 (decimal value); product .0000 0100 (decimal value)
+Iteration 1: multiplicand  .0111 (decimal value); multiplier  .0100 (decimal value); product .0000 0010 (decimal value)
+Iteration 2: multiplicand  .0111 (decimal value); multiplier  .0100 (decimal value); product .0000 0001 (decimal value)
+Iteration 3: multiplicand  .0111 (decimal value); multiplier  .0100 (decimal value); product .1100 1000 (decimal value)
+Iteration 4: multiplicand  .0111 (decimal value); multiplier  .0100 (decimal value); product .0001 1100 (decimal value)
+
+result 0001 1100 => 28

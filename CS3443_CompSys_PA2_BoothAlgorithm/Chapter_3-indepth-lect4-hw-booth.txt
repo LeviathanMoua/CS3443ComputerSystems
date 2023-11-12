@@ -1,0 +1,24 @@
+
+CS3443 Assignment
+
+
+This assignment is to implement Booth algorithm.
+The language is not restrictd as long as one of the compilers on CSX,
+e.g., C, C++, or Java. In other words, your simulator should be compilable 
+and executable on CSX.
+The size to simulate is 4 bit.
+
+Input: command line input as below,
+
+Enter multiplicand: 0001
+Enter multiplier: 1001
+
+(Note that the inputs are to be entered as a string)
+
+Output: standard output on screen as below,
+
+Iteration 0: multiplicand xxxx (decimal value); multiplier xxxx (decimal value); product xxxx xxxx (decimal value)
+Iteration 1: multiplicand xxxx (decimal value); multiplier xxxx (decimal value); product xxxx xxxx (decimal value)
+Iteration 2: multiplicand xxxx (decimal value); multiplier xxxx (decimal value); product xxxx xxxx (decimal value)
+Iteration 3: multiplicand xxxx (decimal value); multiplier xxxx (decimal value); product xxxx xxxx (decimal value)
+Iteration 4: multiplicand xxxx (decimal value); multiplier xxxx (decimal value); product xxxx xxxx (decimal value)

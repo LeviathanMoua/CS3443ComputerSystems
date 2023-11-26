@@ -1,0 +1,52 @@
+
+CS3443 Assignment
+
+
+This assignment is to implement IEEE 754.
+1) Take a decimal value operand and convert it into Encode each operand into IEEE 754 format.
+2) Perform an addition.
+3) Perform a multiplication.
+
+The language is not restrictd as long as one of the compilers on CSX,
+e.g., C, C++, or Java. In other words, your simulator should be compilable 
+and executable on CSX.
+The size to simulate 32 bit.
+
+
+Sample1:
+
+Input: command line input as below,
+
+Enter operand1 (decimal): 2345.125
+Enter operand2 (decimal): .75
+Enter operator (add or mult): add
+
+(Note that the inputs are to be entered as a string)
+
+Output: standard output on screen as below,
+
+operand1: 0     10001010    00100101001001000000000
+operand2: 0     01111110    10000000000000000000000
+
+sum:      0     10001010    00100101001111000000000
+
+
+Sample2:
+
+Input: command line input as below,
+
+Enter operand1 (decimal): -18
+Enter operand2 (decimal): 9.5
+Enter operator (add or mult): mult
+
+(Note that the inputs are to be entered as a string)
+
+Output: standard output on screen as below,
+
+operand1: 1     10000011    00100000000000000000000
+operand2: 0     10000010    00110000000000000000000
+
+product:  1     10000110    01010101100000000000000
+
+
+

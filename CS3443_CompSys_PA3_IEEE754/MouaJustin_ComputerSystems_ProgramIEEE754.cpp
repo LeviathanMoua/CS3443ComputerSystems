@@ -88,7 +88,7 @@ std::string intToBinary8Bit(int strLHS) {
 		while (strLHSBinary[i] != '\0') {
 			i++;
 		}
-		for (int j = i; j <= 8; j++) {
+		for (int j = i; j < 8; j++) {
 			strLHSBinary += '0';
 		}
 	}
@@ -142,8 +142,9 @@ std::string fnStrIEEE754(bool boolSignBit, std::string strLHS, std::string strRH
 	}
 
 	reverse(strLHSBinary.begin(), strLHSBinary.end());
-	std::cout << "LHS in Binary is: " << strLHSBinary;
-	std::cout << std::endl << std::endl;
+	//Sanity Check
+	//std::cout << "LHS in Binary is: " << strLHSBinary;
+	//std::cout << std::endl << std::endl;
 	//=======INTEGER/LHS PART TO BINARY===================
 
 	//=======FRACTIONAL/RHS PART TO BINARY================
@@ -171,8 +172,9 @@ std::string fnStrIEEE754(bool boolSignBit, std::string strLHS, std::string strRH
 
 		//std::cout << fltMult << std::endl;
 	}
-	std::cout << "RHS in Binary is: " << strRHSBinary;
-	std::cout << std::endl << std::endl;
+	//Sanity Check
+	//std::cout << "RHS in Binary is: " << strRHSBinary;
+	//std::cout << std::endl << std::endl;
 	//=======FRACTIONAL/RHS PART TO BINARY================
 
 	//==========BRINGING LHS AND RHS TOGETHER STARTS HERE==========BRINGING LHS AND RHS TOGETHER STARTS HERE=======================
@@ -191,8 +193,11 @@ std::string fnStrIEEE754(bool boolSignBit, std::string strLHS, std::string strRH
 	if (strLHSBinary == "0") {
 		boolMoveRightOrNot = true;
 		strLHSBinary[0] = strRHSBinary[0];
-		std::cout << "strLHSBinary[0] is: " << strLHSBinary;
-		std::cout << std::endl << std::endl;
+		
+		//Sanity Check
+		//std::cout << "strLHSBinary[0] is: " << strLHSBinary;
+		//std::cout << std::endl << std::endl;
+
 		strRHSBinary[0] = '.';
 		strBroughtTogether = strLHSBinary + strRHSBinary;
 		//int i = 0;
@@ -203,13 +208,14 @@ std::string fnStrIEEE754(bool boolSignBit, std::string strLHS, std::string strRH
 		//	i++;
 
 		//}
-		std::cout << "strBroughtTogether is: " << strBroughtTogether;
-		std::cout << std::endl << std::endl;
+		//Sanity Check
+		//std::cout << "strBroughtTogether is: " << strBroughtTogether;
+		//std::cout << std::endl << std::endl;
 	}
 	else {
 		strBroughtTogether = strLHSBinary + '.' + strRHSBinary;
-		std::cout << "strBroughtTogether is: " << strBroughtTogether;
-		std::cout << std::endl << std::endl;
+		//std::cout << "strBroughtTogether is: " << strBroughtTogether;
+		//std::cout << std::endl << std::endl;
 	}
 
 	//==========BRINGING LHS AND RHS TOGETHER ENDS HERE==========BRINGING LHS AND RHS TOGETHER ENDS HERE=======================
@@ -229,7 +235,6 @@ std::string fnStrIEEE754(bool boolSignBit, std::string strLHS, std::string strRH
 	int intHowManyDecimalPlaces = 0;
 	if (boolMoveRightOrNot == true) {
 		intHowManyDecimalPlaces = -1;
-		std::cout << std::endl << std::endl;
 	}
 	else{
 		//We could have just done i will start on the 2nd element (or element [1] up until it sees a '.')
@@ -238,8 +243,9 @@ std::string fnStrIEEE754(bool boolSignBit, std::string strLHS, std::string strRH
 			i++; //This counts how many places the decimal will be nmoving. 
 			intHowManyDecimalPlaces++;
 		}
-		std::cout << "The decimal will need to move " << intHowManyDecimalPlaces << " places to the left.";
-		std::cout << std::endl << std::endl;
+		//Sanity Check
+		//std::cout << "The decimal will need to move " << intHowManyDecimalPlaces << " places to the left.";
+		//std::cout << std::endl << std::endl;
 	}
 	//I have to fix something here. I have to make sure that when entering in .75 or 0.75, 
 	//I account for that the entire binary value is 0.11. I need ot move the decimal to the right then delete the 0. I could reverse this. 
@@ -247,13 +253,16 @@ std::string fnStrIEEE754(bool boolSignBit, std::string strLHS, std::string strRH
 
 
 	int intExponent = intHowManyDecimalPlaces + 127;
-	std::cout << "Exponent is: " << intExponent;
-	std::cout << std::endl << std::endl;
+	//Sanity Check
+	//std::cout << "Exponent is: " << intExponent;
+	//std::cout << std::endl << std::endl;
 
 	//I think I know the problem now. 
 	std::string strBinaryExponent = intToBinary8Bit(intExponent);
-	std::cout << "Exponent in Binary is: " << strBinaryExponent;
-	std::cout << std::endl << std::endl;
+	reverse(strBinaryExponent.begin(), strBinaryExponent.end());
+	//Sanity Check
+	//std::cout << "Exponent in Binary is: " << strBinaryExponent;
+	//std::cout << std::endl << std::endl;
 	//=============EXPONENT ENDS HERE=====================EXPONENT ENDS HERE=====================EXPONENT ENDS HERE=====================
 
 	//=============MANTISSA STARTS HERE=====================MANTISSA STARTS HERE=====================MANTISSA STARTS HERE=====================
@@ -265,11 +274,13 @@ std::string fnStrIEEE754(bool boolSignBit, std::string strLHS, std::string strRH
 			strUnNormalizedMantissa += strBroughtTogether[j];
 		}
 	}
-	std::cout << "Non-Normalized Mantissa is: " << strUnNormalizedMantissa;
-	std::cout << std::endl << std::endl;
+	//Sanity Check
+	//std::cout << "Non-Normalized Mantissa is: " << strUnNormalizedMantissa;
+	//std::cout << std::endl << std::endl;
 
-	std::cout << "Size of Non-Normalized Mantissa excluding the first digit and decimal is: " << strUnNormalizedMantissa.size()-2;
-	std::cout << std::endl << std::endl;
+	//Sanity Check
+	//std::cout << "Size of Non-Normalized Mantissa excluding the first digit and decimal is: " << strUnNormalizedMantissa.size()-2;
+	//std::cout << std::endl << std::endl;
 
 
 	std::string strNormalizedMantissa;
@@ -289,15 +300,297 @@ std::string fnStrIEEE754(bool boolSignBit, std::string strLHS, std::string strRH
 		//std::cout << std::endl << std::endl;
 	}
 
-
-	std::cout << "Normalized Mantissa: " << strNormalizedMantissa;
-	std::cout << std::endl;
+	//Sanity Check
+	//std::cout << "Normalized Mantissa: " << strNormalizedMantissa;
+	//std::cout << std::endl;
 	//=============MANTISSA ENDS HERE=====================MANTISSA ENDS HERE=====================MANTISSA ENDS HERE=====================
+
 
 	strFinalResult = strBinarySignBit + "-" + strBinaryExponent + "-" + strNormalizedMantissa;
 	
 
 	return strFinalResult;
+}
+
+std::string fnSpacer(std::string strUsrInpOp1) {
+	//std::string strUsrInpOp1;
+	std::string strUsrInpOp1LHS; //Integer part
+	std::string strUsrInpOp1RHS; //Fractional part
+	std::string strReturnVal;
+	//=====================OPERAND 1 STARTS HERE=====================OPERAND 1 STARTS HERE=====================OPERAND 1 STARTS HERE=====================OPERAND 1 STARTS HERE=====================
+
+	//====================SEPERATE LHS AND RHS OF OPERAND 1 STARTS HERE=====================
+			//If Operand 1 is just 0
+	if (strUsrInpOp1 == "0" || strUsrInpOp1 == "0.0" || strUsrInpOp1 == "0." || strUsrInpOp1 == ".0") {
+		strReturnVal = "0-00000000-00000000000000000000000";
+		//std::cout << "0-00000000-00000000000000000000000";
+		//std::cout << std::endl;
+	}
+	//If Operand 1 is a decimal AND IS NOT negative AND '.' is not at the beginning AND '.' is not at the end. (Example 123.456
+	//Note that != actually "if '.' is in there" while == means "if '-' is not in there"). when using the .find and std::string::npos. 
+	else if ((strUsrInpOp1.find('.') != std::string::npos) && (strUsrInpOp1.find('-') == std::string::npos) && (strUsrInpOp1[0] != '.') && (strUsrInpOp1[strUsrInpOp1.size() - 1] != '.')) {
+		//Grabs the LHS of Operand 1
+		int i = 0;
+		while (strUsrInpOp1[i] != '.') {
+			strUsrInpOp1LHS += strUsrInpOp1[i];
+			i++;
+		}
+		//Sanity Check
+		//std::cout << "Left-hand side: " << strUsrInpOp1LHS;
+		//std::cout << std::endl << std::endl;
+
+		//Grabs RHS of Operand 1
+		while (strUsrInpOp1[i] != '\0') {
+			//if (strUsrInpOp1[i] != '.') {
+			strUsrInpOp1RHS += strUsrInpOp1[i];
+			//}
+			i++; //Note that this has to be outside the if loop since even if the first character is a '.', we are still looping through the string. 
+		}
+		//Sanity Check
+		//std::cout << "Right-hand side: " << strUsrInpOp1RHS;
+		//std::cout << std::endl << std::endl;
+		//We pass false indicating that the integer is not negative. 
+		strReturnVal = fnStrIEEE754(false, strUsrInpOp1LHS, strUsrInpOp1RHS);
+
+	}
+
+	//(Example: -123.456) | IF Operand 1 is a decimal AND is negative AND '.' is not at the beginning AND '.' is not at the end. Note that the '.' would be the 2nd character or 1st element. 
+	else if (strUsrInpOp1.find('.') != std::string::npos && (strUsrInpOp1.find('-') != std::string::npos) && (strUsrInpOp1[1] != '.') && (strUsrInpOp1[strUsrInpOp1.size() - 1] != '.')) {
+		//Grabs the LHS of Operand 1
+		//Notice how i = 1 to avoid grabbing the negative sign. 
+		int i = 1;
+		while (strUsrInpOp1[i] != '.') {
+			strUsrInpOp1LHS += strUsrInpOp1[i];
+			i++;
+		}
+		//Sanity Check
+		//std::cout << "Left-hand side: " << strUsrInpOp1LHS;
+		//std::cout << std::endl << std::endl;
+
+		//Grabs RHS of Operand 1
+		while (strUsrInpOp1[i] != '\0') {
+			//if (strUsrInpOp1[i] != '.') {
+			strUsrInpOp1RHS += strUsrInpOp1[i];
+			//}
+			i++; //Note that this has to be outside the if loop since even if the first character is a '.', we are still looping through the string. 
+		}
+		//Sanity Check
+		//std::cout << "Right-hand side: " << strUsrInpOp1RHS;
+		//std::cout << std::endl << std::endl;
+
+		//We pass true indicating that the number is negative. 
+		strReturnVal = fnStrIEEE754(true, strUsrInpOp1LHS, strUsrInpOp1RHS);
+
+	}
+
+	//========TO WORK ON========TO WORK ON========TO WORK ON========TO WORK ON========TO WORK ON========TO WORK ON=======
+	//If Operand 1 is a decimal AND IS NOT negative AND HAS a decimal at the beginning. (Example: .123)
+	else if ((strUsrInpOp1[0] == '.') && (strUsrInpOp1.find('-') == std::string::npos)) {
+		//Sanity Check
+		//std::cout << "Positive float value with decimal at the beginning.";
+		//std::cout << std::endl;
+		
+		//Adds 0 before the decimal 
+		reverse(strUsrInpOp1.begin(), strUsrInpOp1.end());
+		strUsrInpOp1 += "0";
+		reverse(strUsrInpOp1.begin(), strUsrInpOp1.end());
+
+		//Sanity Check
+		//std::cout << "Fixed. Now it is: " << strUsrInpOp1;
+		//std::cout << std::endl;
+
+		//Grabs the LHS of Operand 1
+		int i = 0;
+		while (strUsrInpOp1[i] != '.') {
+			strUsrInpOp1LHS += strUsrInpOp1[i];
+			i++;
+		}
+		//Sanity Check
+		//std::cout << "Left-hand side: " << strUsrInpOp1LHS;
+		//std::cout << std::endl << std::endl;
+
+		//Grabs RHS of Operand 1
+		while (strUsrInpOp1[i] != '\0') {
+			//if (strUsrInpOp1[i] != '.') {
+			strUsrInpOp1RHS += strUsrInpOp1[i];
+			//}
+			i++; //Note that this has to be outside the if loop since even if the first character is a '.', we are still looping through the string. 
+		}
+		//Sanity Check
+		//std::cout << "Right-hand side: " << strUsrInpOp1RHS;
+		//std::cout << std::endl << std::endl;
+		//We pass false indicating that the integer is not negative. 
+		strReturnVal = fnStrIEEE754(false, strUsrInpOp1LHS, strUsrInpOp1RHS);
+	}
+
+	//If Operand 1 is a decimal AND IS negative AND HAS a decimal at the beginning. (Example: -.123) | Note that the '.' would be the 2nd character or 1st element. 
+	else if ((strUsrInpOp1[1] == '.') && (strUsrInpOp1.find('-') != std::string::npos)) {
+		//Sanity Check
+		//std::cout << "Negative float value with decimal at the beginning.";
+		//std::cout << std::endl;
+		//Add 0 before the decimal. 
+		reverse(strUsrInpOp1.begin(), strUsrInpOp1.end());
+		strUsrInpOp1[strUsrInpOp1.size() - 1] = '0';
+		strUsrInpOp1 += "-";
+		reverse(strUsrInpOp1.begin(), strUsrInpOp1.end());
+		//Sanity Check
+		//std::cout << "Fixed. Now it is: " << strUsrInpOp1;
+		//std::cout << std::endl;
+	}
+
+	//If Operand 1 is a decimal AND IS NOT negative AND HAS a decimal at the end. (Example: 123.)
+	else if ((strUsrInpOp1[strUsrInpOp1.size() - 1] == '.') && (strUsrInpOp1.find('-') == std::string::npos)) {
+		//Sanity Check
+		//std::cout << "Positive float value with decimal at the end.";
+		//std::cout << std::endl;
+		
+		//Adds a 0 after the after the decimal. 
+		strUsrInpOp1 += "0";
+
+		//Sanity Check
+		//std::cout << "Positive whole number.";
+		//std::cout << std::endl;
+
+		//Grabs the LHS of Operand 1
+		int i = 0;
+		while (strUsrInpOp1[i] != '.') {
+			strUsrInpOp1LHS += strUsrInpOp1[i];
+			i++;
+		}
+		
+		//Sanity Check
+		//std::cout << "Left-hand side: " << strUsrInpOp1LHS;
+		//std::cout << std::endl << std::endl;
+
+		//Grabs RHS of Operand 1
+		while (strUsrInpOp1[i] != '\0') {
+			//if (strUsrInpOp1[i] != '.') {
+			strUsrInpOp1RHS += strUsrInpOp1[i];
+			//}
+			i++; //Note that this has to be outside the if loop since even if the first character is a '.', we are still looping through the string. 
+		}
+		//Sanity Check
+		//std::cout << "Right-hand side: " << strUsrInpOp1RHS;
+		//std::cout << std::endl << std::endl;
+		
+		//We pass false indicating that the integer is not negative. 
+		strReturnVal = fnStrIEEE754(false, strUsrInpOp1LHS, strUsrInpOp1RHS);
+	}
+
+	//If Operand 1 is a decimal AND IS negative AND HAS a decimal at the (Example: -123.)
+	else if ((strUsrInpOp1[strUsrInpOp1.size() - 1] == '.') && (strUsrInpOp1.find('-') != std::string::npos)) {
+		//Sanity Check
+		//std::cout << "Negative float value with decimal at the end.";
+		//std::cout << std::endl;
+		
+		//Adds a 0 after the after the decimal.  
+		strUsrInpOp1 += "0";
+
+		//Sanity Check
+		//std::cout << "Negative whole number.";
+		//std::cout << std::endl;
+
+		//Grabs the LHS of Operand 1
+		//Notice how i = 1 to avoid grabbing the negative sign. 
+		int i = 1;
+		while (strUsrInpOp1[i] != '.') {
+			strUsrInpOp1LHS += strUsrInpOp1[i];
+			i++;
+		}
+		//Sanity Check
+		//std::cout << "Left-hand side: " << strUsrInpOp1LHS;
+		//std::cout << std::endl << std::endl;
+
+		//Grabs RHS of Operand 1
+		while (strUsrInpOp1[i] != '\0') {
+			//if (strUsrInpOp1[i] != '.') {
+			strUsrInpOp1RHS += strUsrInpOp1[i];
+			//}
+			i++; //Note that this has to be outside the if loop since even if the first character is a '.', we are still looping through the string. 
+		}
+		//Sanity Check
+		//std::cout << "Right-hand side: " << strUsrInpOp1RHS;
+		//std::cout << std::endl << std::endl;
+
+		//We pass true indicating that the number is negative. 
+		strReturnVal = fnStrIEEE754(true, strUsrInpOp1LHS, strUsrInpOp1RHS);
+	}
+
+	//If Operand 1 is a whole number/does not have a decimal AND IS NOT negative. (Example: 123)
+	else if ((strUsrInpOp1.find('.') == std::string::npos) && (strUsrInpOp1.find('-') == std::string::npos)) {
+		//Adds a decimal and 0 at the end.
+		strUsrInpOp1 += ".0";
+
+		//Sanity Check
+		//std::cout << "Positive whole number.";
+		//std::cout << std::endl;
+
+		//Grabs the LHS of Operand 1
+		int i = 0;
+		while (strUsrInpOp1[i] != '.') {
+			strUsrInpOp1LHS += strUsrInpOp1[i];
+			i++;
+		}
+		//Sanity Check
+		//std::cout << "Left-hand side: " << strUsrInpOp1LHS;
+		//std::cout << std::endl << std::endl;
+
+		//Grabs RHS of Operand 1
+		while (strUsrInpOp1[i] != '\0') {
+			//if (strUsrInpOp1[i] != '.') {
+			strUsrInpOp1RHS += strUsrInpOp1[i];
+			//}
+			i++; //Note that this has to be outside the if loop since even if the first character is a '.', we are still looping through the string. 
+		}
+		//Sanity Check
+		//std::cout << "Right-hand side: " << strUsrInpOp1RHS;
+		//std::cout << std::endl << std::endl;
+		
+		//We pass false indicating that the integer is not negative. 
+		strReturnVal = fnStrIEEE754(false, strUsrInpOp1LHS, strUsrInpOp1RHS);
+
+	}
+
+	//If Operand 1 is a whole number//does not have a decimal AND IS negative. (Example: -123)
+	else if ((strUsrInpOp1.find('.') == std::string::npos) && (strUsrInpOp1.find('-') != std::string::npos)) {
+		//Adds a decimal and a 0 at the end. 
+		strUsrInpOp1 += ".0";
+
+		//Sanity Check
+		//std::cout << "Negative whole number.";
+		//std::cout << std::endl;
+
+		//Grabs the LHS of Operand 1
+		//Notice how i = 1 to avoid grabbing the negative sign. 
+		int i = 1;
+		while (strUsrInpOp1[i] != '.') {
+			strUsrInpOp1LHS += strUsrInpOp1[i];
+			i++;
+		}
+
+		//Sanity Check
+		//std::cout << "Left-hand side: " << strUsrInpOp1LHS;
+		//std::cout << std::endl << std::endl;
+
+		//Grabs RHS of Operand 1
+		while (strUsrInpOp1[i] != '\0') {
+			//if (strUsrInpOp1[i] != '.') {
+			strUsrInpOp1RHS += strUsrInpOp1[i];
+			//}
+			i++; //Note that this has to be outside the if loop since even if the first character is a '.', we are still looping through the string. 
+		}
+
+		//Sanity Check
+		//std::cout << "Right-hand side: " << strUsrInpOp1RHS;
+		//std::cout << std::endl << std::endl;
+
+		//We pass true indicating that the number is negative. 
+		strReturnVal = fnStrIEEE754(true, strUsrInpOp1LHS, strUsrInpOp1RHS);
+
+	}
+	//might need to make an else statement here to account for numbers that do not have decimals. 
+	//====================SEPERATE LHS AND RHS OF OPERAND 1 ENDS HERE=====================
+	return strReturnVal;
 }
 
 int main() {
@@ -306,260 +599,58 @@ int main() {
 	std::cout << std::endl << std::endl;
 	
 	//Variable Declaration
+	double long dlUsrInpOp1;
+	std::string strOperand1;
 
-	std::string strUsrInpOp1;
-	std::string strUsrInpOp1LHS; //Integer part
-	std::string strUsrInpOp1RHS; //Fractional part
+	double long dlUsrInpOp2;
+	std::string strOperand2;
 
-	
+	double long dlSum;
+	std::string strSum;
+
+	double long dlProduct;
+	std::string strProduct;
+
 	//While loop to continously run the program until asked to stop.
 	while (true) {
 		std::cout << "Enter operand 1 here: ";
-		std::cin >> strUsrInpOp1;
+		std::cin >> strOperand1;
 		std::cout << std::endl;
-		
-		//====================SEPERATE LHS AND RHS OF OPERAND 1 STARTS HERE=====================
-		
-		//If Operand 1 is a decimal AND IS NOT negative AND '.' is not at the beginning AND '.' is not at the end. (Example 123.456
-		//Note that != actually "if '.' is in there" while == means "if '-' is not in there"). when using the .find and std::string::npos. 
-		if ((strUsrInpOp1.find('.') != std::string::npos) && (strUsrInpOp1.find('-') == std::string::npos) && (strUsrInpOp1[0] != '.') && (strUsrInpOp1[strUsrInpOp1.size()-1] != '.')) {
-			//Grabs the LHS of Operand 1
-			int i = 0;
-			while (strUsrInpOp1[i] != '.') {
-				strUsrInpOp1LHS += strUsrInpOp1[i];
-				i++;
-			}
-			std::cout << "Left-hand side: " << strUsrInpOp1LHS;
-			std::cout << std::endl << std::endl;
+		dlUsrInpOp1 = std::stof(strOperand1); 		//Turns the string input into a float so we can add and multiply it. 
 
-			//Grabs RHS of Operand 1
-			while (strUsrInpOp1[i] != '\0') {
-				//if (strUsrInpOp1[i] != '.') {
-					strUsrInpOp1RHS += strUsrInpOp1[i];
-				//}
-				i++; //Note that this has to be outside the if loop since even if the first character is a '.', we are still looping through the string. 
-			}
-			std::cout << "Right-hand side: " << strUsrInpOp1RHS;
-			std::cout << std::endl << std::endl;
-			//We pass false indicating that the integer is not negative. 
-			std::cout << fnStrIEEE754(false, strUsrInpOp1LHS, strUsrInpOp1RHS);
+		std::cout << "Enter operand 2 here: ";
+		std::cin >> strOperand2;
+		std::cout << std::endl;
+		dlUsrInpOp2 = std::stof(strOperand2); 		//Turns the string input into a float so we can add and multiply it. 
 
+		//Addition and Multiplication are perforemd
+		dlSum = dlUsrInpOp1 + dlUsrInpOp2;
+		if (dlSum * 1 == 0) {
+			strSum = "0.0";
 		}
-		
-		//(Example: -123.456) | IF Operand 1 is a decimal AND is negative AND '.' is not at the beginning AND '.' is not at the end. Note that the '.' would be the 2nd character or 1st element. 
-		else if (strUsrInpOp1.find('.') != std::string::npos && (strUsrInpOp1.find('-') != std::string::npos) && (strUsrInpOp1[1] != '.') && (strUsrInpOp1[strUsrInpOp1.size() - 1] != '.')) {
-			//Grabs the LHS of Operand 1
-			//Notice how i = 1 to avoid grabbing the negative sign. 
-			int i = 1;
-			while (strUsrInpOp1[i] != '.') {
-				strUsrInpOp1LHS += strUsrInpOp1[i];
-				i++;
-			}
-			std::cout << "Left-hand side: " << strUsrInpOp1LHS;
-			std::cout << std::endl << std::endl;
-
-			//Grabs RHS of Operand 1
-			while (strUsrInpOp1[i] != '\0') {
-				//if (strUsrInpOp1[i] != '.') {
-				strUsrInpOp1RHS += strUsrInpOp1[i];
-				//}
-				i++; //Note that this has to be outside the if loop since even if the first character is a '.', we are still looping through the string. 
-			}
-			std::cout << "Right-hand side: " << strUsrInpOp1RHS;
-			std::cout << std::endl << std::endl;
-
-			//We pass true indicating that the number is negative. 
-			std::cout  << fnStrIEEE754(true, strUsrInpOp1LHS, strUsrInpOp1RHS);
-
+		else {
+			strSum = std::to_string(dlSum);
 		}
 
-		//========TO WORK ON========TO WORK ON========TO WORK ON========TO WORK ON========TO WORK ON========TO WORK ON=======
-		//If Operand 1 is a decimal AND IS NOT negative AND HAS a decimal at the beginning. (Example: .123)
-		else if ((strUsrInpOp1[0] == '.') && (strUsrInpOp1.find('-') == std::string::npos)) {
-			std::cout << "Positive float value with decimal at the beginning.";
-			std::cout << std::endl;
-			//Adds 0 before the decimal 
-			reverse(strUsrInpOp1.begin(), strUsrInpOp1.end());
-			strUsrInpOp1 += "0";
-			reverse(strUsrInpOp1.begin(), strUsrInpOp1.end());
-
-			std::cout << "Fixed. Now it is: " << strUsrInpOp1;
-			std::cout << std::endl;
-
-			//Grabs the LHS of Operand 1
-			int i = 0;
-			while (strUsrInpOp1[i] != '.') {
-				strUsrInpOp1LHS += strUsrInpOp1[i];
-				i++;
-			}
-			std::cout << "Left-hand side: " << strUsrInpOp1LHS;
-			std::cout << std::endl << std::endl;
-
-			//Grabs RHS of Operand 1
-			while (strUsrInpOp1[i] != '\0') {
-				//if (strUsrInpOp1[i] != '.') {
-				strUsrInpOp1RHS += strUsrInpOp1[i];
-				//}
-				i++; //Note that this has to be outside the if loop since even if the first character is a '.', we are still looping through the string. 
-			}
-			std::cout << "Right-hand side: " << strUsrInpOp1RHS;
-			std::cout << std::endl << std::endl;
-			//We pass false indicating that the integer is not negative. 
-			std::cout << fnStrIEEE754(false, strUsrInpOp1LHS, strUsrInpOp1RHS);
+		dlProduct = dlUsrInpOp1 * dlUsrInpOp2;
+		if (dlProduct * 1 == 0) {
+			strProduct = "0.0";
+		}
+		else {
+			strProduct = std::to_string(dlProduct);
 		}
 
-		//========TO WORK ON========TO WORK ON========TO WORK ON========TO WORK ON========TO WORK ON========TO WORK ON=======
-		//If Operand 1 is a decimal AND IS negative AND HAS a decimal at the beginning. (Example: -.123) | Note that the '.' would be the 2nd character or 1st element. 
-		else if ((strUsrInpOp1[1] == '.') && (strUsrInpOp1.find('-') != std::string::npos)) {
-			std::cout << "Negative float value with decimal at the beginning.";
-			std::cout << std::endl;
-			//Add 0 before the decimal. 
-			reverse(strUsrInpOp1.begin(), strUsrInpOp1.end());
-			strUsrInpOp1[strUsrInpOp1.size() - 1] = '0';
-			strUsrInpOp1 += "-";
-			reverse(strUsrInpOp1.begin(), strUsrInpOp1.end());
+		std::cout << "Operand 1: " << fnSpacer(strOperand1);
+		std::cout << std::endl;
 
-			std::cout << "Fixed. Now it is: " << strUsrInpOp1;
-			std::cout << std::endl;
-		}
+		std::cout << "Operand 2: " << fnSpacer(strOperand2);
+		std::cout << std::endl;
 
-		//If Operand 1 is a decimal AND IS NOT negative AND HAS a decimal at the end. (Example: 123.)
-		else if ((strUsrInpOp1[strUsrInpOp1.size()-1] == '.') && (strUsrInpOp1.find('-') == std::string::npos)) {
-			std::cout << "Positive float value with decimal at the end.";
-			std::cout << std::endl;
-			//Adds a 0 after the after the decimal. 
-			strUsrInpOp1 += "0";
-			std::cout << "Positive whole number.";
-			std::cout << std::endl;
+		std::cout << "Sum:       " << fnSpacer(strSum);
+		std::cout << std::endl;
 
-			//Grabs the LHS of Operand 1
-			int i = 0;
-			while (strUsrInpOp1[i] != '.') {
-				strUsrInpOp1LHS += strUsrInpOp1[i];
-				i++;
-			}
-			std::cout << "Left-hand side: " << strUsrInpOp1LHS;
-			std::cout << std::endl << std::endl;
-
-			//Grabs RHS of Operand 1
-			while (strUsrInpOp1[i] != '\0') {
-				//if (strUsrInpOp1[i] != '.') {
-				strUsrInpOp1RHS += strUsrInpOp1[i];
-				//}
-				i++; //Note that this has to be outside the if loop since even if the first character is a '.', we are still looping through the string. 
-			}
-			std::cout << "Right-hand side: " << strUsrInpOp1RHS;
-			std::cout << std::endl << std::endl;
-			//We pass false indicating that the integer is not negative. 
-			std::cout << fnStrIEEE754(false, strUsrInpOp1LHS, strUsrInpOp1RHS);
-		}
-
-		//If Operand 1 is a decimal AND IS negative AND HAS a decimal at the (Example: -123.)
-		else if ((strUsrInpOp1[strUsrInpOp1.size() - 1] == '.') && (strUsrInpOp1.find('-') != std::string::npos)) {
-			std::cout << "Negative float value with decimal at the end.";
-			std::cout << std::endl;
-			//Adds a 0 after the after the decimal.  
-			strUsrInpOp1 += "0";
-			std::cout << "Negative whole number.";
-			std::cout << std::endl;
-
-			//Grabs the LHS of Operand 1
-			//Notice how i = 1 to avoid grabbing the negative sign. 
-			int i = 1;
-			while (strUsrInpOp1[i] != '.') {
-				strUsrInpOp1LHS += strUsrInpOp1[i];
-				i++;
-			}
-			std::cout << "Left-hand side: " << strUsrInpOp1LHS;
-			std::cout << std::endl << std::endl;
-
-			//Grabs RHS of Operand 1
-			while (strUsrInpOp1[i] != '\0') {
-				//if (strUsrInpOp1[i] != '.') {
-				strUsrInpOp1RHS += strUsrInpOp1[i];
-				//}
-				i++; //Note that this has to be outside the if loop since even if the first character is a '.', we are still looping through the string. 
-			}
-			std::cout << "Right-hand side: " << strUsrInpOp1RHS;
-			std::cout << std::endl << std::endl;
-
-			//We pass true indicating that the number is negative. 
-			std::cout << fnStrIEEE754(true, strUsrInpOp1LHS, strUsrInpOp1RHS);
-		}
-		
-		//If Operand 1 is a whole number/does not have a decimal AND IS NOT negative. (Example: 123)
-		else if ((strUsrInpOp1.find('.') == std::string::npos) && (strUsrInpOp1.find('-') == std::string::npos)) {
-			//Adds a decimal and 0 at the end.
-			strUsrInpOp1 += ".0";
-			std::cout << "Positive whole number.";
-			std::cout << std::endl;
-
-			//Grabs the LHS of Operand 1
-			int i = 0;
-			while (strUsrInpOp1[i] != '.') {
-				strUsrInpOp1LHS += strUsrInpOp1[i];
-				i++;
-			}
-			std::cout << "Left-hand side: " << strUsrInpOp1LHS;
-			std::cout << std::endl << std::endl;
-
-			//Grabs RHS of Operand 1
-			while (strUsrInpOp1[i] != '\0') {
-				//if (strUsrInpOp1[i] != '.') {
-				strUsrInpOp1RHS += strUsrInpOp1[i];
-				//}
-				i++; //Note that this has to be outside the if loop since even if the first character is a '.', we are still looping through the string. 
-			}
-			std::cout << "Right-hand side: " << strUsrInpOp1RHS;
-			std::cout << std::endl << std::endl;
-			//We pass false indicating that the integer is not negative. 
-			std::cout << fnStrIEEE754(false, strUsrInpOp1LHS, strUsrInpOp1RHS);
-
-		}
-		
-		//If Operand 1 is a whole number//does not have a decimal AND IS negative. (Example: -123)
-		else if ((strUsrInpOp1.find('.') == std::string::npos) && (strUsrInpOp1.find('-') != std::string::npos)) {
-		//Adds a decimal and a 0 at the end. 
-			strUsrInpOp1 += ".0";
-			std::cout << "Negative whole number.";
-			std::cout << std::endl;
-
-			//Grabs the LHS of Operand 1
-			//Notice how i = 1 to avoid grabbing the negative sign. 
-			int i = 1;
-			while (strUsrInpOp1[i] != '.') {
-				strUsrInpOp1LHS += strUsrInpOp1[i];
-				i++;
-			}
-			std::cout << "Left-hand side: " << strUsrInpOp1LHS;
-			std::cout << std::endl << std::endl;
-
-			//Grabs RHS of Operand 1
-			while (strUsrInpOp1[i] != '\0') {
-				//if (strUsrInpOp1[i] != '.') {
-				strUsrInpOp1RHS += strUsrInpOp1[i];
-				//}
-				i++; //Note that this has to be outside the if loop since even if the first character is a '.', we are still looping through the string. 
-			}
-			std::cout << "Right-hand side: " << strUsrInpOp1RHS;
-			std::cout << std::endl << std::endl;
-
-			//We pass true indicating that the number is negative. 
-			std::cout << fnStrIEEE754(true, strUsrInpOp1LHS, strUsrInpOp1RHS);	
-
-		}
-		
-		//========TO WORK ON========TO WORK ON========TO WORK ON========TO WORK ON========TO WORK ON========TO WORK ON=======
-		//If Operand 1 is just 0
-		else if (strUsrInpOp1 == "0") {
-			std::cout << "This number is just zero (0).";
-			std::cout << std::endl;
-		}
-
-		//might need to make an else statement here to account for numbers that do not have decimals. 
-		//====================SEPERATE LHS AND RHS OF OPERAND 1 ENDS HERE=====================
-
-		
+		std::cout << "Product:   " << fnSpacer(strProduct);
+		std::cout << std::endl;
 
 		std::cout << std::endl;
 
